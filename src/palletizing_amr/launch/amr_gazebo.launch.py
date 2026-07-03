@@ -9,6 +9,7 @@ from launch import LaunchDescription
 from launch.actions import (
     IncludeLaunchDescription,
     AppendEnvironmentVariable,
+    ExecuteProcess,
     TimerAction
 )
 
@@ -30,6 +31,8 @@ def generate_launch_description():
         'share'
     )
 
+    resource_paths = [workspace_share_dir]
+
     # URDF file path
     urdf_file = os.path.join(
         pkg_share,
@@ -38,13 +41,13 @@ def generate_launch_description():
     )
 
     # Read URDF
-    with open(urdf_file, 'r') as infp:
+    with open(urdf_file, 'r', encoding='utf-8') as infp:
         robot_desc = infp.read()
 
     # Tell Gazebo where model resources are
     set_resource_path = AppendEnvironmentVariable(
         'GZ_SIM_RESOURCE_PATH',
-        workspace_share_dir
+        os.pathsep.join(resource_paths)
     )
 
     # Robot State Publisher
@@ -53,7 +56,8 @@ def generate_launch_description():
         executable='robot_state_publisher',
         output='screen',
         parameters=[
-            {'robot_description': robot_desc}
+            {'robot_description': robot_desc},
+            {'use_sim_time': True}
         ]
     )
 
@@ -71,7 +75,7 @@ def generate_launch_description():
             )
         ),
         launch_arguments={
-            'gz_args': 'empty.sdf -r'
+            'gz_args': '-r empty.sdf'
         }.items()
     )
 
@@ -82,20 +86,92 @@ def generate_launch_description():
         arguments=[
             '-name', 'palletizing_amr',
             '-topic', 'robot_description',
-            '-z', '0.15'     # higher spawn for safe physics start
+            '-x', '0.0',
+            '-y', '0.0',
+            '-z', '1.0'     # higher spawn for safe physics start
         ],
         output='screen'
     )
 
-    # Delay spawn so Gazebo fully starts first
+    # Delay spawn so Gazebo fully starts first (Robot drops at 10 seconds)
     delayed_spawn = TimerAction(
-        period=3.0,
+        period=10.0,
         actions=[spawn_node]
+    )
+
+    joint_state_broadcaster_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["joint_state_broadcaster", "--controller-manager", "/controller_manager"],
+        output="screen"
+    )
+
+    diff_drive_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["diff_drive_base", "--controller-manager", "/controller_manager"],
+        output="screen"
+    )
+
+    delayed_joint_broadcaster = TimerAction(
+        period=13.0,
+        actions=[joint_state_broadcaster_spawner]
+    )
+
+    delayed_diff_drive = TimerAction(
+        period=15.0,
+        actions=[diff_drive_spawner]
+    )
+
+    clock_bridge = Node(
+        package='ros_gz_bridge',
+        executable='parameter_bridge',
+        arguments=['/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock'],
+        output='screen'
+    )
+
+    scan_bridge = Node(
+        package='ros_gz_bridge',
+        executable='parameter_bridge',
+        arguments=['/scan@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan'],
+        output='screen'
+    )
+
+    image_bridge = Node(
+        package='ros_gz_bridge',
+        executable='parameter_bridge',
+        arguments=['/camera/image_raw@sensor_msgs/msg/Image[gz.msgs.Image'],
+        output='screen'
+    )
+
+    camera_info_bridge = Node(
+        package='ros_gz_bridge',
+        executable='parameter_bridge',
+        arguments=['/camera/camera_info@sensor_msgs/msg/CameraInfo[gz.msgs.CameraInfo'],
+        output='screen'
+    )
+
+    cmd_vel_relay = ExecuteProcess(
+        cmd=['python3', os.path.join(pkg_share, 'scripts', 'cmd_vel_relay.py')],
+        output='screen'
+    )
+
+    load_forklift_controller = ExecuteProcess(
+        cmd=['ros2', 'control', 'load_controller', '--set-state', 'active', 'forklift_controller'],
+        output='screen'
     )
 
     return LaunchDescription([
         set_resource_path,
         rsp_node,
         gazebo_node,
-        delayed_spawn
+        clock_bridge,
+        scan_bridge,
+        image_bridge,
+        camera_info_bridge,
+        cmd_vel_relay,
+        delayed_spawn,
+        delayed_joint_broadcaster,  # Notice we are using the delayed variable now
+        delayed_diff_drive,         # Notice we are using the delayed variable now
+        load_forklift_controller
     ])

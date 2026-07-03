@@ -28,6 +28,8 @@ install(DIRECTORY
   meshes
   launch
   rviz
+  config
+  scripts
   DESTINATION share/${PROJECT_NAME}
 )
 
