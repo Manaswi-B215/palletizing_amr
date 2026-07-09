@@ -25,6 +25,12 @@ def generate_launch_description():
     pkg_name = 'palletizing_amr'
     pkg_share = get_package_share_directory(pkg_name)
 
+    world_file = os.path.join(
+        pkg_share,
+        "worlds",
+        "warehouse.sdf"
+    )
+
     # Gazebo resource path so meshes can be found
     workspace_share_dir = os.path.join(
         get_package_prefix(pkg_name),
@@ -75,7 +81,7 @@ def generate_launch_description():
             )
         ),
         launch_arguments={
-            'gz_args': '-r empty.sdf'
+            'gz_args': f'-r {world_file}'
         }.items()
     )
 
@@ -87,7 +93,7 @@ def generate_launch_description():
             '-name', 'palletizing_amr',
             '-topic', 'robot_description',
             '-x', '0.0',
-            '-y', '0.0',
+            '-y', '13.0',
             '-z', '1.0'     # higher spawn for safe physics start
         ],
         output='screen'
@@ -156,9 +162,27 @@ def generate_launch_description():
         output='screen'
     )
 
-    load_forklift_controller = ExecuteProcess(
-        cmd=['ros2', 'control', 'load_controller', '--set-state', 'active', 'forklift_controller'],
+    forklift_effort_spawner = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["forklift_effort_controller", "--controller-manager", "/controller_manager"],
+        output="screen"
+    )
+
+    delayed_forklift_effort = TimerAction(
+        period=17.0,
+        actions=[forklift_effort_spawner]
+    )
+
+    forklift_pid_node = Node(
+        package='palletizing_amr',
+        executable='forklift_position_pid',
         output='screen'
+    )
+
+    delayed_forklift_pid = TimerAction(
+        period=18.0,   # after the effort controller is active
+        actions=[forklift_pid_node]
     )
 
     return LaunchDescription([
@@ -173,5 +197,6 @@ def generate_launch_description():
         delayed_spawn,
         delayed_joint_broadcaster,  # Notice we are using the delayed variable now
         delayed_diff_drive,         # Notice we are using the delayed variable now
-        load_forklift_controller
+        delayed_forklift_effort,
+        delayed_forklift_pid
     ])

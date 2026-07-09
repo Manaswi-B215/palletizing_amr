@@ -18,11 +18,11 @@
 
     <inertial>
       <origin xyz="0 0 0" rpy="0 0 0"/>
-      <mass value="18.0"/>
+      <mass value="160.0"/>
       <inertia
-        ixx="0.53"
-        iyy="0.53"
-        izz="0.48"
+        ixx="4.7"
+        iyy="4.7"
+        izz="4.3"
         ixy="0"
         ixz="0"
         iyz="0"/>
@@ -70,14 +70,17 @@
         <mesh filename="package://palletizing_amr/meshes/forklift.stl" scale="0.001 0.001 0.001"/>
       </geometry>
     </visual>
-
-    <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+    <!-- <collision>
+      <origin xyz="0 0 -0.015" rpy="0 0 0"/>
       <geometry>
-        <box size="0.50 1.00 0.10"/>
+        <box size="0.50 1.00 0.015"/>
       </geometry>
+    </collision> -->
+    <collision>
+        <geometry>
+            <mesh filename="package://palletizing_amr/meshes/forklift.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
     </collision>
-
   </link>
 
 
@@ -272,7 +275,7 @@
     <parent link="base_link"/>
     <child link="wheel_MR1"/>
     <axis xyz="1 0 0"/>
-    <limit effort="100" velocity="15"/>
+    <limit effort="1500" velocity="15"/>
     <dynamics damping="0.1" friction="0.1"/>
   </joint>
 
@@ -281,7 +284,7 @@
     <parent link="base_link"/>
     <child link="wheel_ML1"/>
     <axis xyz="1 0 0"/>
-    <limit effort="100" velocity="15"/>
+    <limit effort="1500" velocity="15"/>
     <dynamics damping="0.1" friction="0.1"/>
   </joint>
 
@@ -290,7 +293,7 @@
     <parent link="base_link"/>
     <child link="wheel_MR2"/>
     <axis xyz="1 0 0"/>
-    <limit effort="100" velocity="15"/>
+    <limit effort="1500" velocity="15"/>
     <dynamics damping="0.1" friction="0.1"/>
   </joint>
 
@@ -299,7 +302,7 @@
     <parent link="base_link"/>
     <child link="wheel_ML2"/>
     <axis xyz="1 0 0"/>
-    <limit effort="100" velocity="15"/>
+    <limit effort="1500" velocity="15"/>
     <dynamics damping="0.1" friction="0.1"/>
   </joint>
 
@@ -346,13 +349,13 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <cylinder radius="0.04" length="0.03"/>
+        <cylinder radius="0.01" length="0.003"/>
       </geometry>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <cylinder radius="0.04" length="0.03"/>
+        <cylinder radius="0.01" length="0.003"/>
       </geometry>
     </collision>
   </link>
@@ -366,13 +369,13 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <box size="0.05 0.08 0.05"/>
+        <box size="0.005 0.008 0.005"/>
       </geometry>
     </visual>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <box size="0.05 0.08 0.05"/>
+        <box size="0.005 0.008 0.005"/>
       </geometry>
     </collision>
   </link>
@@ -380,13 +383,13 @@
   <joint name="lidar_joint" type="fixed">
     <parent link="base_link"/>
     <child link="lidar_link"/>
-    <origin xyz="0.18 0.0 0.22" rpy="0 0 0"/>
+    <origin xyz="0.0 -0.19 0.248" rpy="0 0 0"/>
   </joint>
 
   <joint name="camera_joint" type="fixed">
     <parent link="base_link"/>
     <child link="camera_link"/>
-    <origin xyz="0.22 0.0 0.16" rpy="0 0 0"/>
+    <origin xyz="0.0 -0.205 0.24" rpy="0 1.5708 0"/>
   </joint>
 
   <joint name="prismatic_forklift" type="prismatic">
@@ -399,10 +402,72 @@
     <limit
       lower="0.0"
       upper="0.20"
-      effort="1000"
+      effort="5000"
       velocity="0.5"/>
 
     <dynamics damping="0.1" friction="0.1"/>
+  </joint>
+
+<!-- ===================================================== -->
+<!-- BASE SUPPORT CASTERS (independent of forklift lift)   -->
+<!-- ===================================================== -->
+
+  <link name="wheel_CL">
+    <inertial>
+      <origin xyz="0 0 0"/>
+      <mass value="0.12"/>
+      <inertia ixx="0.00002" iyy="0.00001" izz="0.00001"
+              ixy="0" ixz="0" iyz="0"/>
+    </inertial>
+    <!-- <visual>
+      <origin xyz="0 0 0" rpy="0 1.5708 0"/>
+      <geometry>
+        <cylinder radius="0.028" length="0.02"/>
+      </geometry>
+    </visual> -->
+    <collision>
+      <origin xyz="0 0 0" rpy="0 1.5708 0"/>
+      <geometry>
+        <cylinder radius="0.028" length="0.02"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="wheel_CR">
+    <inertial>
+      <origin xyz="0 0 0"/>
+      <mass value="0.12"/>
+      <inertia ixx="0.00002" iyy="0.00001" izz="0.00001"
+              ixy="0" ixz="0" iyz="0"/>
+    </inertial>
+    <!-- <visual>
+      <origin xyz="0 0 0" rpy="0 1.5708 0"/>
+      <geometry>
+        <cylinder radius="0.028" length="0.02"/>
+      </geometry>
+    </visual> -->
+    <collision>
+      <origin xyz="0 0 0" rpy="0 1.5708 0"/>
+      <geometry>
+        <cylinder radius="0.028" length="0.02"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="revolute_wheel_CL" type="continuous">
+    <origin xyz="-0.15 0.3 -0.2495" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="wheel_CL"/>
+    <axis xyz="1 0 0"/>
+    <dynamics damping="0.05" friction="0.01"/>
+  </joint>
+
+  <joint name="revolute_wheel_CR" type="continuous">
+    <origin xyz="0.15 0.3 -0.2495" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="wheel_CR"/>
+    <axis xyz="1 0 0"/>
+    <dynamics damping="0.05" friction="0.01"/>
   </joint>
 
   <!-- ===================================================== -->
@@ -415,46 +480,51 @@
 
   <gazebo reference="forklift">
     <material>Gazebo/White</material>
+    <mu1>0.8</mu1>
+    <mu2>0.8</mu2>
+    <kp>100000.0</kp>
+    <kd>1.0</kd>
+    <minDepth>0.001</minDepth>
   </gazebo>
 
   <gazebo reference="wheel_ML1">
     <material>Gazebo/DarkGrey</material>
-    <mu1>1.0</mu1>
-    <mu2>1.0</mu2>
-    <kp>10000.0</kp>
-    <kd>10.0</kd>
-    <minDepth>0.001</minDepth>
-    <maxVel>1.0</maxVel>
+    <mu1>3.5</mu1>
+    <mu2>3.5</mu2>
+    <kp>100000.0</kp>
+    <kd>100.0</kd>
+    <minDepth>0.003</minDepth>
+    <maxVel>10.0</maxVel>
   </gazebo>
 
   <gazebo reference="wheel_ML2">
     <material>Gazebo/DarkGrey</material>
-    <mu1>1.0</mu1>
-    <mu2>1.0</mu2>
-    <kp>10000.0</kp>
-    <kd>10.0</kd>
-    <minDepth>0.001</minDepth>
-    <maxVel>1.0</maxVel>
+    <mu1>3.5</mu1>
+    <mu2>3.5</mu2>
+    <kp>100000.0</kp>
+    <kd>100.0</kd>
+    <minDepth>0.003</minDepth>
+    <maxVel>10.0</maxVel>
   </gazebo>
 
   <gazebo reference="wheel_MR1">
     <material>Gazebo/DarkGrey</material>
-    <mu1>1.0</mu1>
-    <mu2>1.0</mu2>
-    <kp>10000.0</kp>
-    <kd>10.0</kd>
-    <minDepth>0.001</minDepth>
-    <maxVel>1.0</maxVel>
+    <mu1>3.5</mu1>
+    <mu2>3.5</mu2>
+    <kp>100000.0</kp>
+    <kd>100.0</kd>
+    <minDepth>0.003</minDepth>
+    <maxVel>10.0</maxVel>
   </gazebo>
 
   <gazebo reference="wheel_MR2">
     <material>Gazebo/DarkGrey</material>
-    <mu1>1.0</mu1>
-    <mu2>1.0</mu2>
-    <kp>10000.0</kp>
-    <kd>10.0</kd>
-    <minDepth>0.001</minDepth>
-    <maxVel>1.0</maxVel>
+    <mu1>3.5</mu1>
+    <mu2>3.5</mu2>
+    <kp>100000.0</kp>
+    <kd>100.0</kd>
+    <minDepth>0.003</minDepth>
+    <maxVel>10.0</maxVel>
   </gazebo>
 
   <gazebo reference="wheel_FLI">
@@ -482,6 +552,22 @@
   </gazebo>
 
   <gazebo reference="wheel_FRO">
+    <material>Gazebo/DarkGrey</material>
+    <mu1>0.1</mu1>
+    <mu2>0.0</mu2>
+    <kp>10000.0</kp>
+    <kd>10.0</kd>
+  </gazebo>
+
+  <gazebo reference="wheel_CL">
+    <material>Gazebo/DarkGrey</material>
+    <mu1>0.1</mu1>
+    <mu2>0.0</mu2>
+    <kp>10000.0</kp>
+    <kd>10.0</kd>
+  </gazebo>
+
+  <gazebo reference="wheel_CR">
     <material>Gazebo/DarkGrey</material>
     <mu1>0.1</mu1>
     <mu2>0.0</mu2>
@@ -532,6 +618,102 @@
     </sensor>
   </gazebo>
 
+    <!-- FORWARD LOAD STABILIZERS — fixed to base_link, positioned under the
+      load's actual center of mass (not the forklift link) so they stay
+      grounded even after the fork lifts. This is what closes the tipping
+      moment gap: your existing wheel_CL/CR at y=0.3 are ~0.4m short of
+      where the load (fork joint at y=0.726, pallet further out) sits. -->
+
+  <link name="wheel_stabL">
+    <inertial>
+      <origin xyz="0 0 0"/>
+      <mass value="0.12"/>
+      <inertia ixx="0.00002" iyy="0.00001" izz="0.00001"
+              ixy="0" ixz="0" iyz="0"/>
+    </inertial>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 1.5708 0"/>
+      <geometry>
+        <cylinder radius="0.028" length="0.02"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="wheel_stabR">
+    <inertial>
+      <origin xyz="0 0 0"/>
+      <mass value="0.12"/>
+      <inertia ixx="0.00002" iyy="0.00001" izz="0.00001"
+              ixy="0" ixz="0" iyz="0"/>
+    </inertial>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 1.5708 0"/>
+      <geometry>
+        <cylinder radius="0.028" length="0.02"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="revolute_wheel_stabL" type="continuous">
+    <origin xyz="-0.22 0.68 -0.2495" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="wheel_stabL"/>
+    <axis xyz="1 0 0"/>
+    <dynamics damping="0.05" friction="0.01"/>
+  </joint>
+
+  <joint name="revolute_wheel_stabR" type="continuous">
+    <origin xyz="0.22 0.68 -0.2495" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="wheel_stabR"/>
+    <axis xyz="1 0 0"/>
+    <dynamics damping="0.05" friction="0.01"/>
+  </joint>
+
+  <gazebo reference="wheel_stabL">
+    <material>Gazebo/DarkGrey</material>
+    <mu1>0.0</mu1>
+    <mu2>0.0</mu2>
+    <kp>50000.0</kp>
+    <kd>50.0</kd>
+    <minDepth>0.001</minDepth>
+  </gazebo>
+
+  <gazebo reference="wheel_stabR">
+    <material>Gazebo/DarkGrey</material>
+    <mu1>0.0</mu1>
+    <mu2>0.0</mu2>
+    <kp>50000.0</kp>
+    <kd>50.0</kd>
+    <minDepth>0.001</minDepth>
+  </gazebo>
+
+   <!-- # counter weight to prevent tipping over when lifting heavy loads
+
+  <link name="counterweight">
+  <inertial>
+    <origin xyz="0 0 0"/>
+    <mass value="50.0"/>
+    <inertia ixx="0.05" iyy="0.05" izz="0.05" ixy="0" ixz="0" iyz="0"/>
+  </inertial>
+  <visual>
+    <geometry>
+      <box size="0.3 0.15 0.15"/>
+    </geometry>
+  </visual>
+  <collision>
+    <geometry>
+      <box size="0.3 0.15 0.15"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="counterweight_joint" type="fixed">
+  <parent link="base_link"/>
+  <child link="counterweight"/>
+  <origin xyz="0 -0.28 -0.15" rpy="0 0 0"/>
+</joint> -->
+
   <ros2_control name="GazeboSimSystem" type="system">
 
     <hardware>
@@ -567,7 +749,7 @@
     </joint>
 
     <joint name="prismatic_forklift">
-      <command_interface name="position"/>
+      <command_interface name="effort"/>
       <state_interface name="position"/>
       <state_interface name="velocity"/>
     </joint>
@@ -577,7 +759,6 @@
   <gazebo>
     <plugin filename="libgz_ros2_control-system.so"
             name="gz_ros2_control::GazeboSimROS2ControlPlugin">
-
       <parameters>/home/mb/amr_ws/install/palletizing_amr/share/palletizing_amr/config/controller.yaml</parameters>
     </plugin>
   </gazebo>
