@@ -255,30 +255,22 @@
       <pose>5.60144 2.30697 0 0 -0 0</pose>
     </include>
     <include>
-      <uri>
-        https://fuel.ignitionrobotics.org/1.0/MovAi/models/pallet_box_mobile
-      </uri>
+      <uri>model://pallet_box_mobile</uri>
       <name>pallet_box_mobile</name>
       <pose>4.4161 14.6952 0.01 0 -0 0</pose>
     </include>
     <include>
-      <uri>
-        https://fuel.ignitionrobotics.org/1.0/MovAi/models/pallet_box_mobile
-      </uri>
+      <uri>model://pallet_box_mobile</uri>
       <name>pallet_box_mobile_0</name>
       <pose>4.45415 13.6212 0.01 0 -0 0</pose>
     </include>
     <include>
-      <uri>
-        https://fuel.ignitionrobotics.org/1.0/MovAi/models/pallet_box_mobile
-      </uri>
+      <uri>model://pallet_box_mobile</uri>
       <name>pallet_box_mobile_1</name>
       <pose>4.4468 12.229 0.01 0 -0 0</pose>
     </include>
     <include>
-      <uri>
-        https://fuel.ignitionrobotics.org/1.0/MovAi/models/pallet_box_mobile
-      </uri>
+      <uri>model://pallet_box_mobile</uri>
       <name>pallet_box</name>
       <pose>-6.11913 13.7079 0.01 0 -0 0</pose>
       <static>true</static>
@@ -340,9 +332,7 @@
       <pose>13.3818 -14.1028 0 0 -0 0</pose>
     </include>
     <include>
-      <uri>
-        https://fuel.ignitionrobotics.org/1.0/MovAi/models/pallet_box_mobile
-      </uri>
+     <uri>model://pallet_box_mobile</uri>
       <name>pallet_box_0</name>
       <pose>14.0222 -24.335 0.01 0 -0 0</pose>
       <static>true</static>
@@ -354,7 +344,7 @@
       <visual name="visual">
         <geometry>
           <box>
-            <size>0.05 12 0.02</size>
+            <size>0.08 12 0.02</size>
           </box>
         </geometry>
         <material>
@@ -364,6 +354,882 @@
       </visual>
     </link>
     <pose>0 7 0.001 0 0 0</pose>
+  </model>
+
+  <model name="line2">
+    <static>true</static>
+    <link name="link">
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>2 0.08 0.02</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0 0 0 1</ambient>
+          <diffuse>0 0 0 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <pose>2.5 14.73 0.001 0 0 0</pose>
+  </model>
+
+  <!-- ===================== -->
+  <!--     Cross Marker 1    -->
+  <!-- ===================== -->
+
+  <model name="cross_1_horizontal">
+    <static>true</static>
+    <link name="link">
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.50 0.08 0.02</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0 0 0 1</ambient>
+          <diffuse>0 0 0 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <pose>3 14.7 0.001 0 0 0.7854</pose>
+  </model>
+
+  <model name="cross_1_vertical">
+    <static>true</static>
+    <link name="link">
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.08 0.50 0.02</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0 0 0 1</ambient>
+          <diffuse>0 0 0 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <pose>3 14.7 0.001 0 0 0.7854</pose>
+  </model>
+
+  <!-- ===================== -->
+  <!-- Cross Marker 2 -->
+  <!-- ===================== -->
+
+  <model name="cross_2_horizontal">
+    <static>true</static>
+    <link name="link">
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.50 0.08 0.02</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0 0 0 1</ambient>
+          <diffuse>0 0 0 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <pose>0 1 0.001 0 0 0.7854</pose>
+  </model>
+
+  <model name="cross_2_vertical">
+    <static>true</static>
+    <link name="link">
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.08 0.50 0.02</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0 0 0 1</ambient>
+          <diffuse>0 0 0 1</diffuse>
+        </material>
+      </visual>
+    </link>
+    <pose>0 1 0.001 0 0 0.7854</pose>
+  </model>
+
+  <model name="curve_1">
+    <static>true</static>
+
+    <link name="link">
+
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.16 0.08 0.02</size>
+          </box>
+        </geometry>
+
+        <material>
+          <ambient>0 0 0 1</ambient>
+          <diffuse>0 0 0 1</diffuse>
+        </material>
+
+      </visual>
+    </link>
+
+    <pose>1.750 14.750 0.001 0 0 3.14159</pose>
+
+  </model>
+
+
+  <model name="curve_2">
+    <static>true</static>
+
+    <link name="link">
+
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.16 0.08 0.02</size>
+          </box>
+        </geometry>
+
+        <material>
+          <ambient>0 0 0 1</ambient>
+          <diffuse>0 0 0 1</diffuse>
+        </material>
+
+      </visual>
+
+    </link>
+
+    <pose>1.655 14.747 0.001 0 0 3.19576</pose>
+
+  </model>
+
+
+  <model name="curve_3">
+    <static>true</static>
+
+    <link name="link">
+
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.16 0.08 0.02</size>
+          </box>
+        </geometry>
+
+        <material>
+          <ambient>0 0 0 1</ambient>
+          <diffuse>0 0 0 1</diffuse>
+        </material>
+
+      </visual>
+
+    </link>
+
+    <pose>1.561 14.740 0.001 0 0 3.24992</pose>
+
+  </model>
+
+
+  <model name="curve_4">
+    <static>true</static>
+
+    <link name="link">
+
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.16 0.08 0.02</size>
+          </box>
+        </geometry>
+
+        <material>
+          <ambient>0 0 0 1</ambient>
+          <diffuse>0 0 0 1</diffuse>
+        </material>
+
+      </visual>
+
+    </link>
+
+    <pose>1.467 14.727 0.001 0 0 3.30409</pose>
+
+  </model>
+
+
+  <model name="curve_5">
+    <static>true</static>
+
+    <link name="link">
+
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.16 0.08 0.02</size>
+          </box>
+        </geometry>
+
+        <material>
+          <ambient>0 0 0 1</ambient>
+          <diffuse>0 0 0 1</diffuse>
+        </material>
+
+      </visual>
+
+    </link>
+
+    <pose>1.374 14.709 0.001 0 0 3.35825</pose>
+
+  </model>
+
+
+  <model name="curve_6">
+    <static>true</static>
+
+    <link name="link">
+
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.16 0.08 0.02</size>
+          </box>
+        </geometry>
+
+        <material>
+          <ambient>0 0 0 1</ambient>
+          <diffuse>0 0 0 1</diffuse>
+        </material>
+
+      </visual>
+
+    </link>
+
+    <pose>1.282 14.686 0.001 0 0 3.41242</pose>
+
+  </model>
+
+
+  <model name="curve_7">
+    <static>true</static>
+
+    <link name="link">
+
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.16 0.08 0.02</size>
+          </box>
+        </geometry>
+
+        <material>
+          <ambient>0 0 0 1</ambient>
+          <diffuse>0 0 0 1</diffuse>
+        </material>
+
+      </visual>
+
+    </link>
+
+    <pose>1.191 14.658 0.001 0 0 3.46658</pose>
+
+  </model>
+
+
+  <model name="curve_8">
+    <static>true</static>
+
+    <link name="link">
+
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.16 0.08 0.02</size>
+          </box>
+        </geometry>
+
+        <material>
+          <ambient>0 0 0 1</ambient>
+          <diffuse>0 0 0 1</diffuse>
+        </material>
+
+      </visual>
+
+    </link>
+
+    <pose>1.102 14.626 0.001 0 0 3.52075</pose>
+
+  </model>
+
+
+  <model name="curve_9">
+    <static>true</static>
+
+    <link name="link">
+
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.16 0.08 0.02</size>
+          </box>
+        </geometry>
+
+        <material>
+          <ambient>0 0 0 1</ambient>
+          <diffuse>0 0 0 1</diffuse>
+        </material>
+
+      </visual>
+
+    </link>
+
+    <pose>1.015 14.588 0.001 0 0 3.57492</pose>
+
+  </model>
+
+
+  <model name="curve_10">
+    <static>true</static>
+
+    <link name="link">
+
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.16 0.08 0.02</size>
+          </box>
+        </geometry>
+
+        <material>
+          <ambient>0 0 0 1</ambient>
+          <diffuse>0 0 0 1</diffuse>
+        </material>
+
+      </visual>
+
+    </link>
+
+    <pose>0.930 14.546 0.001 0 0 3.62908</pose>
+
+  </model>
+
+
+  <model name="curve_11">
+    <static>true</static>
+
+    <link name="link">
+
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.16 0.08 0.02</size>
+          </box>
+        </geometry>
+
+        <material>
+          <ambient>0 0 0 1</ambient>
+          <diffuse>0 0 0 1</diffuse>
+        </material>
+
+      </visual>
+
+    </link>
+
+    <pose>0.848 14.500 0.001 0 0 3.68325</pose>
+
+  </model>
+
+
+  <model name="curve_12">
+    <static>true</static>
+
+    <link name="link">
+
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.16 0.08 0.02</size>
+          </box>
+        </geometry>
+
+        <material>
+          <ambient>0 0 0 1</ambient>
+          <diffuse>0 0 0 1</diffuse>
+        </material>
+
+      </visual>
+
+    </link>
+
+    <pose>0.768 14.448 0.001 0 0 3.73741</pose>
+
+  </model>
+
+
+  <model name="curve_13">
+    <static>true</static>
+
+    <link name="link">
+
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.16 0.08 0.02</size>
+          </box>
+        </geometry>
+
+        <material>
+          <ambient>0 0 0 1</ambient>
+          <diffuse>0 0 0 1</diffuse>
+        </material>
+
+      </visual>
+
+    </link>
+
+    <pose>0.691 14.393 0.001 0 0 3.79158</pose>
+
+  </model>
+
+
+  <model name="curve_14">
+    <static>true</static>
+
+    <link name="link">
+
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.16 0.08 0.02</size>
+          </box>
+        </geometry>
+
+        <material>
+          <ambient>0 0 0 1</ambient>
+          <diffuse>0 0 0 1</diffuse>
+        </material>
+
+      </visual>
+
+    </link>
+
+    <pose>0.617 14.334 0.001 0 0 3.84574</pose>
+
+  </model>
+
+
+  <model name="curve_15">
+    <static>true</static>
+
+    <link name="link">
+
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.16 0.08 0.02</size>
+          </box>
+        </geometry>
+
+        <material>
+          <ambient>0 0 0 1</ambient>
+          <diffuse>0 0 0 1</diffuse>
+        </material>
+
+      </visual>
+
+    </link>
+
+    <pose>0.547 14.270 0.001 0 0 3.89991</pose>
+
+  </model>
+
+
+  <model name="curve_16">
+    <static>true</static>
+
+    <link name="link">
+
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.16 0.08 0.02</size>
+          </box>
+        </geometry>
+
+        <material>
+          <ambient>0 0 0 1</ambient>
+          <diffuse>0 0 0 1</diffuse>
+        </material>
+
+      </visual>
+
+    </link>
+
+    <pose>0.480 14.203 0.001 0 0 3.95407</pose>
+
+  </model>
+
+
+  <model name="curve_17">
+    <static>true</static>
+
+    <link name="link">
+
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.16 0.08 0.02</size>
+          </box>
+        </geometry>
+
+        <material>
+          <ambient>0 0 0 1</ambient>
+          <diffuse>0 0 0 1</diffuse>
+        </material>
+
+      </visual>
+
+    </link>
+
+    <pose>0.416 14.133 0.001 0 0 4.00824</pose>
+
+  </model>
+
+
+  <model name="curve_18">
+    <static>true</static>
+
+    <link name="link">
+
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.16 0.08 0.02</size>
+          </box>
+        </geometry>
+
+        <material>
+          <ambient>0 0 0 1</ambient>
+          <diffuse>0 0 0 1</diffuse>
+        </material>
+
+      </visual>
+
+    </link>
+
+    <pose>0.357 14.059 0.001 0 0 4.06240</pose>
+
+  </model>
+
+
+  <model name="curve_19">
+    <static>true</static>
+
+    <link name="link">
+
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.16 0.08 0.02</size>
+          </box>
+        </geometry>
+
+        <material>
+          <ambient>0 0 0 1</ambient>
+          <diffuse>0 0 0 1</diffuse>
+        </material>
+
+      </visual>
+
+    </link>
+
+    <pose>0.302 13.982 0.001 0 0 4.11657</pose>
+
+  </model>
+
+
+  <model name="curve_20">
+    <static>true</static>
+
+    <link name="link">
+
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.16 0.08 0.02</size>
+          </box>
+        </geometry>
+
+        <material>
+          <ambient>0 0 0 1</ambient>
+          <diffuse>0 0 0 1</diffuse>
+        </material>
+
+      </visual>
+
+    </link>
+
+    <pose>0.250 13.902 0.001 0 0 4.17074</pose>
+
+  </model>
+
+
+  <model name="curve_21">
+    <static>true</static>
+
+    <link name="link">
+
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.16 0.08 0.02</size>
+          </box>
+        </geometry>
+
+        <material>
+          <ambient>0 0 0 1</ambient>
+          <diffuse>0 0 0 1</diffuse>
+        </material>
+
+      </visual>
+
+    </link>
+
+    <pose>0.204 13.820 0.001 0 0 4.22490</pose>
+
+  </model>
+
+
+  <model name="curve_22">
+    <static>true</static>
+
+    <link name="link">
+
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.16 0.08 0.02</size>
+          </box>
+        </geometry>
+
+        <material>
+          <ambient>0 0 0 1</ambient>
+          <diffuse>0 0 0 1</diffuse>
+        </material>
+
+      </visual>
+
+    </link>
+
+    <pose>0.162 13.735 0.001 0 0 4.27907</pose>
+
+  </model>
+
+
+  <model name="curve_23">
+    <static>true</static>
+
+    <link name="link">
+
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.16 0.08 0.02</size>
+          </box>
+        </geometry>
+
+        <material>
+          <ambient>0 0 0 1</ambient>
+          <diffuse>0 0 0 1</diffuse>
+        </material>
+
+      </visual>
+
+    </link>
+
+    <pose>0.124 13.648 0.001 0 0 4.33323</pose>
+
+  </model>
+
+
+  <model name="curve_24">
+    <static>true</static>
+
+    <link name="link">
+
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.16 0.08 0.02</size>
+          </box>
+        </geometry>
+
+        <material>
+          <ambient>0 0 0 1</ambient>
+          <diffuse>0 0 0 1</diffuse>
+        </material>
+
+      </visual>
+
+    </link>
+
+    <pose>0.092 13.559 0.001 0 0 4.38740</pose>
+
+  </model>
+
+
+  <model name="curve_25">
+    <static>true</static>
+
+    <link name="link">
+
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.16 0.08 0.02</size>
+          </box>
+        </geometry>
+
+        <material>
+          <ambient>0 0 0 1</ambient>
+          <diffuse>0 0 0 1</diffuse>
+        </material>
+
+      </visual>
+
+    </link>
+
+    <pose>0.064 13.468 0.001 0 0 4.44156</pose>
+
+  </model>
+
+
+  <model name="curve_26">
+    <static>true</static>
+
+    <link name="link">
+
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.16 0.08 0.02</size>
+          </box>
+        </geometry>
+
+        <material>
+          <ambient>0 0 0 1</ambient>
+          <diffuse>0 0 0 1</diffuse>
+        </material>
+
+      </visual>
+
+    </link>
+
+    <pose>0.041 13.376 0.001 0 0 4.49573</pose>
+
+  </model>
+
+
+  <model name="curve_27">
+    <static>true</static>
+
+    <link name="link">
+
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.16 0.08 0.02</size>
+          </box>
+        </geometry>
+
+        <material>
+          <ambient>0 0 0 1</ambient>
+          <diffuse>0 0 0 1</diffuse>
+        </material>
+
+      </visual>
+
+    </link>
+
+    <pose>0.023 13.283 0.001 0 0 4.54989</pose>
+
+  </model>
+
+
+  <model name="curve_28">
+    <static>true</static>
+
+    <link name="link">
+
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.16 0.08 0.02</size>
+          </box>
+        </geometry>
+
+        <material>
+          <ambient>0 0 0 1</ambient>
+          <diffuse>0 0 0 1</diffuse>
+        </material>
+
+      </visual>
+
+    </link>
+
+    <pose>0.010 13.189 0.001 0 0 4.60406</pose>
+
+  </model>
+
+
+  <model name="curve_29">
+    <static>true</static>
+
+    <link name="link">
+
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.16 0.08 0.02</size>
+          </box>
+        </geometry>
+
+        <material>
+          <ambient>0 0 0 1</ambient>
+          <diffuse>0 0 0 1</diffuse>
+        </material>
+
+      </visual>
+
+    </link>
+
+    <pose>0.003 13.095 0.001 0 0 4.65822</pose>
+
+  </model>
+
+
+  <model name="curve_30">
+    <static>true</static>
+
+    <link name="link">
+
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.16 0.08 0.02</size>
+          </box>
+        </geometry>
+
+        <material>
+          <ambient>0 0 0 1</ambient>
+          <diffuse>0 0 0 1</diffuse>
+        </material>
+
+      </visual>
+
+    </link>
+
+    <pose>0.000 13.000 0.001 0 0 4.71239</pose>
+
   </model>
 
   </world>

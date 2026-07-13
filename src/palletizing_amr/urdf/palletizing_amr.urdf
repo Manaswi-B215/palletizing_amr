@@ -389,7 +389,7 @@
   <joint name="camera_joint" type="fixed">
     <parent link="base_link"/>
     <child link="camera_link"/>
-    <origin xyz="0.0 -0.205 0.24" rpy="0 1.5708 0"/>
+    <origin xyz="0.0 -0.205 0.24" rpy="0 0.3854 -1.5708"/>
   </joint>
 
   <joint name="prismatic_forklift" type="prismatic">
@@ -405,7 +405,7 @@
       effort="5000"
       velocity="0.5"/>
 
-    <dynamics damping="0.1" friction="0.1"/>
+    <dynamics damping="20" friction="0.1"/>
   </joint>
 
 <!-- ===================================================== -->
@@ -529,32 +529,32 @@
 
   <gazebo reference="wheel_FLI">
     <material>Gazebo/DarkGrey</material>
-    <mu1>0.1</mu1>
-    <mu2>0.0</mu2>
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
     <kp>10000.0</kp>
     <kd>10.0</kd>
   </gazebo>
 
   <gazebo reference="wheel_FLO">
     <material>Gazebo/DarkGrey</material>
-    <mu1>0.1</mu1>
-    <mu2>0.0</mu2>
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
     <kp>10000.0</kp>
     <kd>10.0</kd>
   </gazebo>
 
   <gazebo reference="wheel_FRI">
     <material>Gazebo/DarkGrey</material>
-    <mu1>0.1</mu1>
-    <mu2>0.0</mu2>
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
     <kp>10000.0</kp>
     <kd>10.0</kd>
   </gazebo>
 
   <gazebo reference="wheel_FRO">
     <material>Gazebo/DarkGrey</material>
-    <mu1>0.1</mu1>
-    <mu2>0.0</mu2>
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
     <kp>10000.0</kp>
     <kd>10.0</kd>
   </gazebo>

@@ -37,7 +37,10 @@ def generate_launch_description():
         'share'
     )
 
-    resource_paths = [workspace_share_dir]
+    resource_paths = [
+        workspace_share_dir,
+        os.path.join(pkg_share, "models"),
+    ]
 
     # URDF file path
     urdf_file = os.path.join(
@@ -92,9 +95,10 @@ def generate_launch_description():
         arguments=[
             '-name', 'palletizing_amr',
             '-topic', 'robot_description',
-            '-x', '0.0',
-            '-y', '13.0',
-            '-z', '1.0'     # higher spawn for safe physics start
+            '-x', '2.50',
+            '-y', '14.73',
+            '-z', '1.0',
+            '-Y', '-1.5708'
         ],
         output='screen'
     )
@@ -157,6 +161,18 @@ def generate_launch_description():
         output='screen'
     )
 
+    delayed_rqt = TimerAction(
+        period=5.0,
+        actions=[
+            Node(
+                package='rqt_image_view',
+                executable='rqt_image_view',
+                arguments=['/camera/image_raw'],
+                output='screen'
+            )
+        ]
+    )
+
     cmd_vel_relay = ExecuteProcess(
         cmd=['python3', os.path.join(pkg_share, 'scripts', 'cmd_vel_relay.py')],
         output='screen'
@@ -198,5 +214,6 @@ def generate_launch_description():
         delayed_joint_broadcaster,  # Notice we are using the delayed variable now
         delayed_diff_drive,         # Notice we are using the delayed variable now
         delayed_forklift_effort,
-        delayed_forklift_pid
+        delayed_forklift_pid,
+        delayed_rqt
     ])
