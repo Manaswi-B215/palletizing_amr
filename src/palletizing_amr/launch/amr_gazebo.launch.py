@@ -140,10 +140,32 @@ def generate_launch_description():
         output='screen'
     )
 
-    scan_bridge = Node(
+    # scan_bridge = Node(
+    #     package='ros_gz_bridge',
+    #     executable='parameter_bridge',
+    #     arguments=['/scan@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan'],
+    #     output='screen'
+    # )
+
+    pointcloud_bridge = Node(
         package='ros_gz_bridge',
         executable='parameter_bridge',
-        arguments=['/scan@sensor_msgs/msg/LaserScan[gz.msgs.LaserScan'],
+        arguments=[
+            '/scan/points@sensor_msgs/msg/PointCloud2[gz.msgs.PointCloudPacked'
+        ],
+        output='screen'
+    )
+
+    rviz_config = os.path.join(
+        pkg_share,
+        'rviz',
+        'amr.rviz'
+    )
+
+    rviz_node = Node(
+        package='rviz2',
+        executable='rviz2',
+        arguments=['-d', rviz_config],
         output='screen'
     )
 
@@ -206,7 +228,9 @@ def generate_launch_description():
         rsp_node,
         gazebo_node,
         clock_bridge,
-        scan_bridge,
+        # scan_bridge,
+        pointcloud_bridge,
+        rviz_node,
         image_bridge,
         camera_info_bridge,
         cmd_vel_relay,
